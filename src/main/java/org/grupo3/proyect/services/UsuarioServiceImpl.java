@@ -53,6 +53,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             Usuario usuarioSeleccionado = usuarioRepository.findById(id).get();
             usuarioSeleccionado.setUsuarioNombre(usuarioActualizado.getUsuarioNombre());
             usuarioSeleccionado.setEmail(usuarioActualizado.getEmail());
+            usuarioSeleccionado.setContraseniaUsuario(usuarioActualizado.getContraseniaUsuario());
+            usuarioSeleccionado.setFechaDeNacimientoUsuario(usuarioActualizado.getFechaDeNacimientoUsuario());
             System.out.println("El usuario ha sido actualizado");
             return usuarioRepository.save(usuarioSeleccionado);
         } else {

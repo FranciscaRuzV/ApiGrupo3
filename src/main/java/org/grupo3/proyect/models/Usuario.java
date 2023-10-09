@@ -7,6 +7,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 
+import java.util.List;
+
+
 @Data //Le puse el Data para hacerlo mas clean y no poner los getter setter y constructores.
 @Entity
 @Table(name = "Usuarios")
@@ -20,15 +23,11 @@ public class Usuario {
     @NotNull
     private String usuarioNombre;
 
-    @Min(value = 18, message = "La edad minima para el registro son 18 años")
-    @NotNull
-    private Integer usuarioEdad;
-
     @Email(message = "Introduce tu correo electronico")
     @NotNull
     private String email;
 
-    @Column(name = "fechaDeNacimiento") // este puede ser borrado y solo quedamos con la edadUsuario
+    @Column(name = "fechaDeNacimiento")
     @NotNull
     private String fechaDeNacimientoUsuario;
 
@@ -39,5 +38,13 @@ public class Usuario {
     @Column(name = "Password")
     @NotNull
     private String contraseniaUsuario; //Aqui deberiamos ver si es passwordAunth en vez de String, me queda esa duda.
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Post> postUsuario;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Comentario> comentarioUsuario;
+
+
 
 }
