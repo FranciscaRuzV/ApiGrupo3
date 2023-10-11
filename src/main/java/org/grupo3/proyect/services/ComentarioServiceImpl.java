@@ -2,7 +2,9 @@ package org.grupo3.proyect.services;
 
 import jakarta.transaction.Transactional;
 import org.grupo3.proyect.models.Comentario;
+import org.grupo3.proyect.models.Usuario;
 import org.grupo3.proyect.repositories.ComentarioRepository;
+import org.grupo3.proyect.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ public class ComentarioServiceImpl implements ComentarioService {
 
     @Autowired
     ComentarioRepository comentarioRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @Override
     public List<Comentario> listaDeComentarios() {
@@ -35,8 +39,9 @@ public class ComentarioServiceImpl implements ComentarioService {
 
 
     @Override
-    public Comentario guardarComentario(Comentario comentarioNuevo) {
-
+    public Comentario guardarComentario(Comentario comentarioNuevo, Long id) {
+        Usuario usuarioComentario = usuarioRepository.findById(id).get();
+        comentarioNuevo.setUsuario(usuarioComentario);
         return comentarioRepository.save(comentarioNuevo);
     }
 

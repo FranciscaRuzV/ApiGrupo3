@@ -11,7 +11,7 @@ public interface ComentarioService {
 
     Comentario buscarComentarioPorId(Long id);
 
-    Comentario guardarComentario(Comentario comentarioNuevo);
+    Comentario guardarComentario(Comentario comentarioNuevo, Long id);
 
     void borrarComentario(Long id);
 

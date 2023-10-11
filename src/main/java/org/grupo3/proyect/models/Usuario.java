@@ -1,5 +1,6 @@
 package org.grupo3.proyect.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -43,5 +44,12 @@ public class Usuario {
     @JsonManagedReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Post> postUsuario;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Comentario> comentarios;
+
+    /*@JsonManagedReference
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    private List<Comentario> comentarioUsuario; */
 
 }
