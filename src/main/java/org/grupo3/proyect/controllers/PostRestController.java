@@ -19,6 +19,12 @@ public class PostRestController {
     List<Post> listaMostrar = postService.listaDePosts();
     return listaMostrar; }
 
+    @GetMapping("/lista/PorFecha")
+    public List<Post> getPostsByFechaDesc( ){
+        List<Post> listaPorFecha = postService.listaDePosts();
+        return listaPorFecha;
+    }
+
     @GetMapping("/buscar/{id}")
     public Post postPorId(@PathVariable Long id) {
         Post postMostrar = postService.buscarPostPorId(id);

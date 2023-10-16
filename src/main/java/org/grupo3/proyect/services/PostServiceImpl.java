@@ -63,4 +63,9 @@ public class PostServiceImpl implements PostService {
             return null;
         }
     }
+
+    public List<Post> getPostsByFechaDesc() {
+        return postRepository.findAllByFechaDesc();
+    }
+
 }

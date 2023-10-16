@@ -1,6 +1,7 @@
 package org.grupo3.proyect.controllers;
 
 import org.grupo3.proyect.models.Comentario;
+import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.models.Usuario;
 import org.grupo3.proyect.repositories.UsuarioRepository;
 import org.grupo3.proyect.services.ComentarioService;
@@ -24,6 +25,12 @@ public class ComentarioRestController {
         List<Comentario> listaMostrar = comentarioService.listaDeComentarios();
         return listaMostrar;
     }
+    @GetMapping("/lista/PorFecha")
+    public List<Comentario> getComentariosByFechaDesc( ){
+        List<Comentario> listaPorFecha = comentarioService.listaDeComentarios();
+        return listaPorFecha;
+    }
+
     @GetMapping("/buscar/{id}")
     public Comentario comentarioPorId(@PathVariable Long id) {
         Comentario comentarioMostrar = comentarioService.buscarComentarioPorId(id);
@@ -39,7 +46,7 @@ public class ComentarioRestController {
     }*/
 
     @PostMapping("/{id}/nuevo")
-    public Comentario guardarNuevoComentario(@PathVariable Long id, @RequestBody Comentario comentarioNuevo) {
+    public Comentario guardarNuevoComentario(@RequestParam Long id, @RequestBody Comentario comentarioNuevo) {
         Comentario comentarioParaGuardar = comentarioService.guardarComentario(comentarioNuevo, id);
         return comentarioParaGuardar;
     }

@@ -18,9 +18,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comentario> comentarioPost;
+
 
     @JsonBackReference
     @ManyToOne
@@ -34,5 +32,8 @@ public class Post {
     private String postImagen;
     private String postVideo;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comentario> postComentario;
 
 }

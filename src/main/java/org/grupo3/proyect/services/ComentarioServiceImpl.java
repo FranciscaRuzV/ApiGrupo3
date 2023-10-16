@@ -2,6 +2,7 @@ package org.grupo3.proyect.services;
 
 import jakarta.transaction.Transactional;
 import org.grupo3.proyect.models.Comentario;
+import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.models.Usuario;
 import org.grupo3.proyect.repositories.ComentarioRepository;
 import org.grupo3.proyect.repositories.UsuarioRepository;
@@ -66,5 +67,8 @@ public class ComentarioServiceImpl implements ComentarioService {
             System.out.println("El post no existe o el id es inválido");
             return null;
         }
+    }
+    public List<Comentario> getComentariosByFechaDesc() {
+        return comentarioRepository.findAllByFechaDesc();
     }
 }
