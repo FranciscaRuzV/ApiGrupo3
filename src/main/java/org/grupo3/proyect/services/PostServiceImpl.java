@@ -3,6 +3,7 @@ package org.grupo3.proyect.services;
 import jakarta.transaction.Transactional;
 import org.grupo3.proyect.DTO.comentarioDTO;
 import org.grupo3.proyect.DTO.postDTO;
+import org.grupo3.proyect.models.Comentario;
 import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,16 +69,27 @@ public class PostServiceImpl implements PostService {
     }
 
     public List<postDTO> getPostsByFechaDesc() {
+
         List<Post> listaDePost = postRepository.findAllByFechaDesc();
         List<postDTO> listaDePostParaMostrar = new ArrayList<>();
         for(int i = 0; i< listaDePost.size(); i++){
+            List<comentarioDTO> listaDeComentarios = new ArrayList<>();
             postDTO postPublicar = new postDTO();
             Post post = listaDePost.get(i);
+            for (int o = 0; o< post.getPostComentario().size();o++){
+                comentarioDTO comentarioPost = new comentarioDTO();
+                Comentario comentario = post.getPostComentario().get(o);
+                comentarioPost.setComentarioTexto(comentario.getComentarioTexto());
+                comentarioPost.setCreatedAt(comentario.getCreatedAt());
+                comentarioPost.setUsuarioNombre(comentario.getUsuario().getUsuarioNombre());
+                listaDeComentarios.add(comentarioPost);
+            }
             postPublicar.setPostTitulo(post.getPostTitulo());
             postPublicar.setCreatedAt(post.getCreatedAt());
             postPublicar.setPostTexto(post.getPostTexto());
             postPublicar.setPostImagen(post.getPostImagen());
             postPublicar.setPostVideo(post.getPostVideo());
+            postPublicar.setPostComentarios(listaDeComentarios);
             postPublicar.setUsuarioNombre(post.getUsuario().getUsuarioNombre());
             listaDePostParaMostrar.add(postPublicar);
         }

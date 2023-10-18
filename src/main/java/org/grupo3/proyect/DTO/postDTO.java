@@ -28,5 +28,5 @@ public class postDTO {
     private String postImagen;
     private String postVideo;
     private String usuarioNombre;
-
+    List<comentarioDTO> postComentarios;
 }
