@@ -1,11 +1,14 @@
 package org.grupo3.proyect.services;
 
 import jakarta.transaction.Transactional;
+import org.grupo3.proyect.DTO.comentarioDTO;
+import org.grupo3.proyect.DTO.postDTO;
 import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,8 +67,22 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-    public List<Post> getPostsByFechaDesc() {
-        return postRepository.findAllByFechaDesc();
+    public List<postDTO> getPostsByFechaDesc() {
+        List<Post> listaDePost = postRepository.findAllByFechaDesc();
+        List<postDTO> listaDePostParaMostrar = new ArrayList<>();
+        for(int i = 0; i< listaDePost.size(); i++){
+            postDTO postPublicar = new postDTO();
+            Post post = listaDePost.get(i);
+            postPublicar.setPostTitulo(post.getPostTitulo());
+            postPublicar.setCreatedAt(post.getCreatedAt());
+            postPublicar.setPostTexto(post.getPostTexto());
+            postPublicar.setPostImagen(post.getPostImagen());
+            postPublicar.setPostVideo(post.getPostVideo());
+            postPublicar.setUsuarioNombre(post.getUsuario().getUsuarioNombre());
+            listaDePostParaMostrar.add(postPublicar);
+        }
+        return listaDePostParaMostrar;
     }
+
 
 }

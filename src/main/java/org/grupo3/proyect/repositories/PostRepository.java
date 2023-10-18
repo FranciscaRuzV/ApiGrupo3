@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "SELECT * FROM Post ORDER BY post_fecha DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM Post ORDER BY created_at DESC", nativeQuery = true)
     List<Post> findAllByFechaDesc();
 }

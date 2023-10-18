@@ -1,10 +1,12 @@
 package org.grupo3.proyect.controllers;
 
+import org.grupo3.proyect.DTO.comentarioDTO;
 import org.grupo3.proyect.models.Comentario;
 import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.models.Usuario;
 import org.grupo3.proyect.repositories.UsuarioRepository;
 import org.grupo3.proyect.services.ComentarioService;
+import org.grupo3.proyect.services.ComentarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +18,8 @@ import java.util.List;
 public class ComentarioRestController {
 
     @Autowired
-    ComentarioService comentarioService;
-    /*@Autowired
-    private UsuarioRepository usuarioRepository;*/
+    ComentarioServiceImpl comentarioService;
+
 
     @GetMapping("/lista")
     public List<Comentario> listadeComentarios() {
@@ -26,8 +27,8 @@ public class ComentarioRestController {
         return listaMostrar;
     }
     @GetMapping("/lista/PorFecha")
-    public List<Comentario> getComentariosByFechaDesc(){
-        List<Comentario> listaPorFecha = comentarioService.listaDeComentarios();
+    public List<comentarioDTO> getComentariosByFechaDesc(){
+        List<comentarioDTO> listaPorFecha = comentarioService.getComentariosByFechaDesc();
         return listaPorFecha;
     }
 

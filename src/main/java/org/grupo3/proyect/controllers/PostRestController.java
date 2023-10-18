@@ -1,7 +1,9 @@
 package org.grupo3.proyect.controllers;
 
+import org.grupo3.proyect.DTO.postDTO;
 import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.services.PostService;
+import org.grupo3.proyect.services.PostServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,7 @@ import java.util.List;
 @RequestMapping("/post")
 public class PostRestController {
     @Autowired
-    PostService postService;
+    PostServiceImpl postService;
 
     @GetMapping("/lista")
     public List<Post> listaDePosts( ){
@@ -20,8 +22,8 @@ public class PostRestController {
     return listaMostrar; }
 
     @GetMapping("/lista/PorFecha")
-    public List<Post> getPostsByFechaDesc( ){
-        List<Post> listaPorFecha = postService.listaDePosts();
+    public List<postDTO> getPostsByFechaDesc(){
+        List<postDTO> listaPorFecha = postService.getPostsByFechaDesc();
         return listaPorFecha;
     }
 

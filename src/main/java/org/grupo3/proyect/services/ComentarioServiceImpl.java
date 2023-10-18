@@ -1,6 +1,8 @@
 package org.grupo3.proyect.services;
 
 import jakarta.transaction.Transactional;
+import org.grupo3.proyect.DTO.comentarioDTO;
+import org.grupo3.proyect.DTO.postDTO;
 import org.grupo3.proyect.models.Comentario;
 import org.grupo3.proyect.models.Post;
 import org.grupo3.proyect.models.Usuario;
@@ -9,6 +11,7 @@ import org.grupo3.proyect.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,7 +63,6 @@ public class ComentarioServiceImpl implements ComentarioService {
             Comentario comentarioSeleccionado = comentarioRepository.findById(id).get();
             comentarioSeleccionado.setComentarioId(comentarioActualizado.getComentarioId());
             comentarioSeleccionado.setComentarioTexto(comentarioActualizado.getComentarioTexto());
-            comentarioSeleccionado.setComentarioFecha(comentarioActualizado.getComentarioFecha());
             System.out.println("El post ha sido actualizado");
             return comentarioRepository.save(comentarioSeleccionado);
         } else {
@@ -68,7 +70,18 @@ public class ComentarioServiceImpl implements ComentarioService {
             return null;
         }
     }
-    public List<Comentario> getComentariosByFechaDesc() {
-        return comentarioRepository.findAllByFechaDesc();
+
+    public List<comentarioDTO> getComentariosByFechaDesc() {
+        List<Comentario> listaDeComentario = comentarioRepository.findAllByFechaDesc();
+        List<comentarioDTO> listaDeComentarioParaMostrar = new ArrayList<>();
+        for(int i = 0; i< listaDeComentario.size(); i++){
+            comentarioDTO comentarioPublicar = new comentarioDTO();
+            Comentario comentario = listaDeComentario.get(i);
+            comentarioPublicar.setCreatedAt(comentario.getCreatedAt());
+            comentarioPublicar.setComentarioTexto(comentario.getComentarioTexto());
+            comentarioPublicar.setUsuarioNombre(comentario.getUsuario().getUsuarioNombre());
+            listaDeComentarioParaMostrar.add(comentarioPublicar);
+        }
+        return listaDeComentarioParaMostrar;
     }
 }

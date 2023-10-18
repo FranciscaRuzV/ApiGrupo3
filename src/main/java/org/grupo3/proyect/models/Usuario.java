@@ -1,6 +1,8 @@
 package org.grupo3.proyect.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -41,7 +43,7 @@ public class Usuario {
     @NotNull
     private String contraseniaUsuario; //Aqui deberiamos ver si es passwordAunth en vez de String, me queda esa duda.
 
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Post> postUsuario;
 

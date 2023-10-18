@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ComentarioRepository extends JpaRepository<Comentario, Long> {
 
-    @Query(value = "SELECT * FROM Comentario ORDER BY comentario_fecha DESC", nativeQuery = true)
+    @Query(value = "SELECT * FROM Comentario ORDER BY created_at DESC", nativeQuery = true)
     List<Comentario> findAllByFechaDesc();
 }
